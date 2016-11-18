@@ -22,8 +22,7 @@ function hideLoginButton() {
 function showLoginButton() {
 	console.log("Visual: showLoginButton");
 	$("#loginButton").show();
-	$("#loginButton").unbind().click(function() {});
-	$("#loginButton").click(function() {
+	$("#loginButton").one('click',function() {
 		login();
 	});	
 }
@@ -39,8 +38,7 @@ function showLogoutButton(userEmail) {
 	console.log("Visual: showLogoutButton");
 	$("#logoutButton").html("logout " + userEmail);
 	$("#logoutButton").show();
-    $("#logoutButton").unbind().click(function() {});	
-	$("#logoutButton").click(function() {
+	$("#logoutButton").one('click',function() {
 		logout();
-	});	
+	});
 }
