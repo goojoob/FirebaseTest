@@ -23,10 +23,10 @@
 
 		firebase.auth().onAuthStateChanged(function(user) {
 			if (user) {
-				console.log("AuthStateChanged: User logged");
+				console.log("AuthStateChanged: " + user.email + " logged");
 				showData();
 				hideLoginButton();
-				showLogoutButton();
+				showLogoutButton(user.email);
 			} else {
 				console.log("AuthStateChanged: User NOT logged");
 				hideData();

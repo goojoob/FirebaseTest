@@ -35,8 +35,9 @@ function hideLogoutButton() {
 	$("#logoutButton").hide();
 }
 
-function showLogoutButton() {
+function showLogoutButton(userEmail) {
 	console.log("Visual: showLogoutButton");
+	$("#logoutButton").html("logout " + userEmail);
 	$("#logoutButton").show();
     $("#logoutButton").unbind().click(function() {});	
 	$("#logoutButton").click(function() {
