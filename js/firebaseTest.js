@@ -16,16 +16,22 @@
 
 			snapshot.forEach(function(child) {
 				output.push(child.val().date+'-'+child.val().desc+'<br/>');	
-				console.log(child.val().desc);
+				console.log("Data: " + child.val().desc);
 			});
 			$('#data-table').html(output.join(''));
 		});
 
 		firebase.auth().onAuthStateChanged(function(user) {
 			if (user) {
-				alert(user.email);
+				console.log("AuthStateChanged: User logged");
+				showData();
+				hideLoginButton();
+				showLogoutButton();
 			} else {
-				alert("NO LOG");
+				console.log("AuthStateChanged: User NOT logged");
+				hideData();
+				showLoginButton();
+				hideLogoutButton();
 			}
 		});
 
@@ -35,7 +41,7 @@
 			var password = "testUser";
 			
 			firebase.auth().signInWithEmailAndPassword(email, password).then(function() {
-				console.log("HOLA");
+				console.log("AuthSignIn: " + email + " signed in");
 			}, function(error) {
 				var errorCode = error.code;
 				var errorMessage = error.message;
@@ -46,14 +52,14 @@
 		
 		function logout() {
 			firebase.auth().signOut().then(function() {
-			  alert("SIGNED OUT");
+				console.log("AuthSignOut: user signed out");
 			}, function(error) {
 			  alert("ERROR SIGNING OUT");
 			});				
 		}
 
 
-		function addpush() {
+		function add() {
 			var llave = firebase.database().ref('queja').push({
 				userid: "goojoob",
 				desc: "text desc",
@@ -67,7 +73,7 @@
 		}
 		
 		
-		function add() {
+		function addset() {
 			var reference = firebase.database().ref('queja').child("id1");
 			reference.set({
 				userid: "goojoob",
