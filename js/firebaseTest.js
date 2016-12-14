@@ -11,11 +11,11 @@
 
 
 
-		firebase.database().ref('queja').on('value', function(snapshot) {
+		firebase.database().ref('queja').orderByChild('date').on('value', function(snapshot) {
 			var output = [];
 
 			snapshot.forEach(function(child) {
-				output.push(child.val().date+'-'+child.val().desc+'<br/>');	
+				output.push(child.val().date+'-'+child.val().userid+'<br/>');	
 				console.log("Data: " + child.val().desc);
 			});
 			$('#data-table').html(output.join(''));
@@ -41,7 +41,7 @@
 			var password = "testUser";
 			
 			firebase.auth().signInWithEmailAndPassword(email, password).then(function() {
-				console.log("AuthSignIn: " + email + " signed in");
+				console.log("\nAuthSignIn: " + email + " signed in");
 			}, function(error) {
 				var errorCode = error.code;
 				var errorMessage = error.message;
@@ -52,7 +52,7 @@
 		
 		function logout() {
 			firebase.auth().signOut().then(function() {
-				console.log("AuthSignOut: user signed out");
+				console.log("\nAuthSignOut: user signed out");
 			}, function(error) {
 			  alert("ERROR SIGNING OUT");
 			});				
@@ -61,8 +61,8 @@
 
 		function add() {
 			var llave = firebase.database().ref('queja').push({
-				userid: "goojoob",
-				desc: "text desc",
+				userid: 'goojoobo',
+				desc: 'text desco',
 				coor: 21,
 				date: firebase.database.ServerValue.TIMESTAMP
 			}, function(error) {
@@ -74,10 +74,10 @@
 		
 		
 		function addset() {
-			var reference = firebase.database().ref('queja').child("id1");
+			var reference = firebase.database().ref('queja').child("id2");
 			reference.set({
-				userid: "goojoob",
-				desc: "text desc",
+				userid: 'goojoobo',
+				desc: 'text desco',
 				coor: 21,
 				date: firebase.database.ServerValue.TIMESTAMP
 			}, function(error) {
